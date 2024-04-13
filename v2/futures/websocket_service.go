@@ -297,7 +297,12 @@ func WsKlineServe(symbol string, interval string, handler WsKlineHandler, errHan
 		event := new(WsKlineEvent)
 		err := json.Unmarshal(message, event)
 		if err != nil {
+
+			// print raw message
+			fmt.Println("go-binance: can not parse ws message:", string(message))
+			
 			errHandler(err)
+
 			return
 		}
 		handler(event)
